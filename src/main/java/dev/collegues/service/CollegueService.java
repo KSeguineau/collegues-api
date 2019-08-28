@@ -9,6 +9,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 import dev.collegues.entite.Collegue;
+import dev.collegues.exception.CollegueNonTrouveException;
 import lombok.Data;
 
 @Data
@@ -35,5 +36,14 @@ public class CollegueService {
 	public List<Collegue> rechercherParNom(String nomRecherche) {
 		List<Collegue> list = new ArrayList<Collegue>(data.values());
 		return list.stream().filter(c -> c.getNom().equals(nomRecherche)).collect(Collectors.toList());
+	}
+
+	public Collegue rechercherParMatricule(String matricule) {
+		Collegue c = data.get(matricule);
+		if (c != null) {
+			return c;
+		} else {
+			throw new CollegueNonTrouveException("aucun collegue avec ce matricule n’a été trouvé");
+		}
 	}
 }
