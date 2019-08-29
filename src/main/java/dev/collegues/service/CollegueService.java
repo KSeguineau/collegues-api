@@ -101,7 +101,7 @@ public class CollegueService {
 	 * @return un collegue
 	 */
 	public Collegue modifierEmail(String matricule, String email) {
-
+    //TODO utiliser CollegueValidator
 		Collegue collegue = this.rechercherParMatricule(matricule);
 		if (collegue == null) {
 			throw new CollegueNonTrouveException();
@@ -122,7 +122,7 @@ public class CollegueService {
 	 * @return un collegue
 	 */
 	public Collegue modifierPhotoUrl(String matricule, String photoUrl) {
-
+//TODO utiliser CollegueValidator
 		Collegue collegue = this.rechercherParMatricule(matricule);
 		if (collegue == null) {
 			throw new CollegueNonTrouveException();
