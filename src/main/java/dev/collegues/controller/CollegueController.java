@@ -59,7 +59,7 @@ public class CollegueController {
 
 	@ExceptionHandler({ CollegueInvalideException.class })
 	public ResponseEntity<String> errorInvalide() {
-		return ResponseEntity.status(500)
+		return ResponseEntity.status(400)
 				.body("Informations du collegue incorrect");
 
 	}
