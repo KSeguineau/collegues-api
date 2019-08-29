@@ -4,6 +4,7 @@ import static java.util.stream.Collectors.toList;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,7 +29,12 @@ public class CollegueController {
 	/**
 	 * Classe service des collegues
 	 */
-	CollegueService collegueService = new CollegueService();
+	CollegueService collegueService;
+
+	@Autowired
+	public CollegueController(CollegueService collegueService) {
+		this.collegueService = collegueService;
+	}
 
 	/**
 	 * traite la requete de recherche par nom

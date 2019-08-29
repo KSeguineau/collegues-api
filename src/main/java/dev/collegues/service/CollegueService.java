@@ -1,23 +1,24 @@
 package dev.collegues.service;
 
 import java.time.LocalDate;
-import java.time.Period;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import java.util.stream.Collectors;
-
 import dev.collegues.entite.Collegue;
 import dev.collegues.exception.CollegueInvalideException;
 import dev.collegues.exception.CollegueNonTrouveException;
+import dev.collegues.utils.CollegueValidator;
 import lombok.Data;
+import org.springframework.stereotype.Service;
 
 /**
  * Service gérant les collegues
  */
 @Data
+@Service
 public class CollegueService {
 
 	/**
@@ -25,11 +26,16 @@ public class CollegueService {
 	 */
 	private Map<String, Collegue> data = new HashMap<>();
 
+    /**
+     * Classe contenant des methodes de validation de collegue
+     */
+    private CollegueValidator collegueValidator;
+
 	/**
 	 * Constructeur par défaut
 	 * créer automatiquement 4 collegues
 	 */
-	public CollegueService() {
+	public CollegueService(CollegueValidator collegueValidator) {
 
 		Collegue c = new Collegue(UUID.randomUUID().toString(), "bob", "bobby", "a@a.fr", LocalDate.now(),
 				"https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/SNice.svg/180px-SNice.svg.png");
@@ -43,6 +49,8 @@ public class CollegueService {
 		c = new Collegue(UUID.randomUUID().toString(), "tim", "timmy", "d@d.fr", LocalDate.now(),
 				"https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/SNice.svg/180px-SNice.svg.png");
 		data.put(c.getMatricule(), c);
+
+		this.collegueValidator = collegueValidator;
 	}
 
 	/**
@@ -75,16 +83,9 @@ public class CollegueService {
 	 * @return un collegue
 	 */
 	public Collegue ajouterUnCollegue(Collegue collegue) {
-		boolean nom, prenom, email, photo, ddn;
-
-		nom = collegue.getNom().length() > 1;
-		prenom = collegue.getPrenom().length() > 1;
-		email = collegue.getEmail().length() > 2 && collegue.getEmail().contains("@");
-		photo = collegue.getPhotoUrl().startsWith("http");
-		ddn = Period.between(collegue.getDdn(), LocalDate.now()).getYears() >= 18;
 		collegue.setMatricule(UUID.randomUUID().toString());
 
-		if (nom && prenom && email && photo && ddn) {
+		if (collegueValidator.validerCollegue(collegue)) {
 			this.data.put(collegue.getMatricule(), collegue);
 			return collegue;
 		} else {
