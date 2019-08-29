@@ -67,4 +67,36 @@ public class CollegueService {
 		}
 
 	}
+
+	public Collegue modifierEmail(String matricule, String email) {
+
+		Collegue collegue = this.rechercherParMatricule(matricule);
+		if (collegue == null) {
+			throw new CollegueNonTrouveException();
+		}
+
+		if (email.length() > 2 && email.contains("@")) {
+			collegue.setEmail(email);
+			return collegue;
+		} else {
+			throw new CollegueInvalideException();
+		}
+	}
+
+	public Collegue modifierPhotoUrl(String matricule, String photoUrl) {
+
+		Collegue collegue = this.rechercherParMatricule(matricule);
+		if (collegue == null) {
+			throw new CollegueNonTrouveException();
+		}
+
+		if (photoUrl.startsWith("http")) {
+			collegue.setPhotoUrl(photoUrl);
+			return collegue;
+		} else {
+			throw new CollegueInvalideException();
+		}
+
+	}
+
 }
