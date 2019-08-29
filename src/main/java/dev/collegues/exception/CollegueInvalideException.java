@@ -1,5 +1,8 @@
 package dev.collegues.exception;
 
+/**
+ * Exception lancé lorsque les information d’un collegue ne sont pas valide
+ */
 public class CollegueInvalideException extends RuntimeException {
 
 	public CollegueInvalideException() {
