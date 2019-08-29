@@ -1,6 +1,7 @@
 package dev.collegues.service;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 import dev.collegues.entite.Collegue;
+import dev.collegues.exception.CollegueInvalideException;
 import dev.collegues.exception.CollegueNonTrouveException;
 import lombok.Data;
 
@@ -45,5 +47,24 @@ public class CollegueService {
 		} else {
 			throw new CollegueNonTrouveException("aucun collegue avec ce matricule n’a été trouvé");
 		}
+	}
+
+	public Collegue ajouterUnCollegue(Collegue collegue) {
+		boolean nom, prenom, email, photo, ddn;
+
+		nom = collegue.getNom().length() > 1;
+		prenom = collegue.getPrenom().length() > 1;
+		email = collegue.getEmail().length() > 2 && collegue.getEmail().contains("@");
+		photo = collegue.getPhotoUrl().startsWith("http");
+		ddn = Period.between(collegue.getDdn(), LocalDate.now()).getYears() >= 18;
+		collegue.setMatricule(UUID.randomUUID().toString());
+
+		if (nom && prenom && email && photo && ddn) {
+			this.data.put(collegue.getMatricule(), collegue);
+			return collegue;
+		} else {
+			throw new CollegueInvalideException();
+		}
+
 	}
 }
