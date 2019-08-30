@@ -10,10 +10,13 @@ import java.util.stream.Collectors;
 import dev.collegues.entite.Collegue;
 import dev.collegues.exception.CollegueInvalideException;
 import dev.collegues.exception.CollegueNonTrouveException;
+import dev.collegues.repository.CollegueRepository;
 import dev.collegues.utils.CollegueValidator;
 import dev.collegues.utils.DataUtils;
 import lombok.Data;
 import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
 
 /**
  * Service gérant les collegues
@@ -29,17 +32,18 @@ public class CollegueService {
     private CollegueValidator collegueValidator;
 
 	/**
-	 * Classe gérant la generation de collegue et leur stockage
+	 * interface gérant les actions avec la base de donnees
 	 */
-	private DataUtils dataUtils;
+	private CollegueRepository collegueRepository;
+
 
 	/**
 	 * Constructeur
 	 */
-	public CollegueService(CollegueValidator collegueValidator,DataUtils dataUtils) {
+	public CollegueService(CollegueValidator collegueValidator,CollegueRepository collegueRepository) {
 
 		this.collegueValidator = collegueValidator;
-		this.dataUtils = dataUtils;
+		this.collegueRepository=collegueRepository;
 	}
 
 	/**
@@ -47,7 +51,7 @@ public class CollegueService {
 	 * @param nomRecherche nom du collegue à rechercher
 	 * @return Une List de collegue */
 	public List<Collegue> rechercherParNom(String nomRecherche) {
-		return dataUtils.rechercheParNom(nomRecherche);
+		return collegueRepository.findByNom(nomRecherche);
 	}
 
 	/**
@@ -56,7 +60,7 @@ public class CollegueService {
 	 * @return un Collegue
 	 */
 	public Collegue rechercherParMatricule(String matricule) {
-		Collegue c = dataUtils.rechercheParMatricule(matricule);
+		Collegue c = collegueRepository.findByMatricule(matricule);
 		if (c != null) {
 			return c;
 		} else {
@@ -74,7 +78,7 @@ public class CollegueService {
 		collegue.setMatricule(UUID.randomUUID().toString());
 
 		if (collegueValidator.validerCollegue(collegue)) {
-			dataUtils.ajouterCollegue(collegue);
+			collegueRepository.save(collegue);
 			return collegue;
 		} else {
 			throw new CollegueInvalideException();
@@ -88,6 +92,7 @@ public class CollegueService {
 	 * @param email nouvelle valeur de l’email
 	 * @return un collegue
 	 */
+	@Transactional
 	public Collegue modifierEmail(String matricule, String email) {
 		Collegue collegue = this.rechercherParMatricule(matricule);
 		if (collegue == null) {
@@ -96,6 +101,8 @@ public class CollegueService {
 
 		if (collegueValidator.longueurValide(email,2) && collegueValidator.isContains(collegue)) {
 			collegue.setEmail(email);
+			collegueRepository.save(collegue);
+
 			return collegue;
 		} else {
 			throw new CollegueInvalideException();
@@ -108,6 +115,7 @@ public class CollegueService {
 	 * @param photoUrl nouvelle valeur de l’url de la photo
 	 * @return un collegue
 	 */
+	@Transactional
 	public Collegue modifierPhotoUrl(String matricule, String photoUrl) {
 		Collegue collegue = this.rechercherParMatricule(matricule);
 		if (collegue == null) {
@@ -116,6 +124,7 @@ public class CollegueService {
 
 		if (collegueValidator.startWithhttp(collegue)) {
 			collegue.setPhotoUrl(photoUrl);
+			collegueRepository.save(collegue);
 			return collegue;
 		} else {
 			throw new CollegueInvalideException();

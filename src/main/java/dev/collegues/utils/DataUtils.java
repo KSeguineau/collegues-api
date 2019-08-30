@@ -1,12 +1,14 @@
 package dev.collegues.utils;
 
 import dev.collegues.entite.Collegue;
+import lombok.Data;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 
+@Data
 @Component
 public class DataUtils {
 

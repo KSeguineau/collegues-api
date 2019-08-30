@@ -4,17 +4,24 @@ import java.time.LocalDate;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 /**
  * Clase représentant un collegue
  */
 @Data
+@NoArgsConstructor
 @AllArgsConstructor
+@Entity
 public class Collegue {
 
 	/**
 	 * matricule du collegue
 	 */
+	@Id
 	private String matricule;
 	/**
 	 * nom du collegue
