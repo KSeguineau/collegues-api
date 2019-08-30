@@ -99,7 +99,7 @@ public class CollegueService {
 			throw new CollegueNonTrouveException();
 		}
 
-		if (collegueValidator.longueurValide(email,2) && collegueValidator.isContains(collegue)) {
+		if (collegueValidator.longueurValide(email,2) && collegueValidator.isContains(email)) {
 			collegue.setEmail(email);
 			collegueRepository.save(collegue);
 
@@ -122,7 +122,7 @@ public class CollegueService {
 			throw new CollegueNonTrouveException();
 		}
 
-		if (collegueValidator.startWithhttp(collegue)) {
+		if (collegueValidator.startWithhttp(photoUrl)) {
 			collegue.setPhotoUrl(photoUrl);
 			collegueRepository.save(collegue);
 			return collegue;

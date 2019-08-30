@@ -47,7 +47,7 @@ public class CollegueValidatorTest {
         CollegueValidator collegueValidator = new CollegueValidator();
         Collegue c = new Collegue(UUID.randomUUID().toString(), "bob", "bobby", "a@a.fr", LocalDate.now(),
                 "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/SNice.svg/180px-SNice.svg.png");
-        assertThat(collegueValidator.startWithhttp(c)).isTrue();
+        assertThat(collegueValidator.startWithhttp(c.getPhotoUrl())).isTrue();
     }
 
     @Test
@@ -55,7 +55,7 @@ public class CollegueValidatorTest {
         CollegueValidator collegueValidator = new CollegueValidator();
         Collegue c = new Collegue(UUID.randomUUID().toString(), "bob", "bobby", "a@a.fr", LocalDate.now(),
                 "/upload.wikimedia.org/wikipedia/commons/thumb/e/e0/SNice.svg/180px-SNice.svg.png");
-        assertThat(collegueValidator.startWithhttp(c)).isFalse();
+        assertThat(collegueValidator.startWithhttp(c.getPhotoUrl())).isFalse();
     }
 
     @Test
@@ -63,7 +63,7 @@ public class CollegueValidatorTest {
         CollegueValidator collegueValidator = new CollegueValidator();
         Collegue c = new Collegue(UUID.randomUUID().toString(), "bob", "bobby", "a@a.fr", LocalDate.now(),
                 "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/SNice.svg/180px-SNice.svg.png");
-        assertThat(collegueValidator.isContains(c)).isTrue();
+        assertThat(collegueValidator.isContains(c.getEmail())).isTrue();
     }
 
     @Test
@@ -71,7 +71,7 @@ public class CollegueValidatorTest {
         CollegueValidator collegueValidator = new CollegueValidator();
         Collegue c = new Collegue(UUID.randomUUID().toString(), "bob", "bobby", "aa.fr", LocalDate.now(),
                 "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/SNice.svg/180px-SNice.svg.png");
-        assertThat(collegueValidator.isContains(c)).isFalse();
+        assertThat(collegueValidator.isContains(c.getEmail())).isFalse();
     }
 
     @Test

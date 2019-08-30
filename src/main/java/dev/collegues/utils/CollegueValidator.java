@@ -25,8 +25,8 @@ public class CollegueValidator {
 
     nom = longueurValide(collegue.getNom(), 1);
     prenom = longueurValide(collegue.getPrenom(), 1);
-    email = longueurValide(collegue.getEmail(), 2) && isContains(collegue);
-    photo = startWithhttp(collegue);
+    email = longueurValide(collegue.getEmail(), 2) && isContains(collegue.getEmail());
+    photo = startWithhttp(collegue.getPhotoUrl());
     ddn = ageValide(collegue);
 
     return nom && prenom && email && photo && ddn;
@@ -45,20 +45,20 @@ public class CollegueValidator {
 
     /**
      * valide si l’url de la photo commence par http
-     * @param collegue un collegue
+     * @param url l’url d’une photo
      * @return un boolean
      */
-    public boolean startWithhttp(Collegue collegue) {
-        return collegue.getPhotoUrl().startsWith("http");
+    public boolean startWithhttp(String url) {
+        return url.startsWith("http");
     }
 
     /**
      * valide si l’email contient @
-     * @param collegue un collegue
+     * @param email un email
      * @return un boolean
      */
-    public boolean isContains(Collegue collegue) {
-        return collegue.getEmail().contains("@");
+    public boolean isContains(String email) {
+        return email.contains("@");
     }
 
     /**
