@@ -39,6 +39,7 @@ public class CollegueService {
 	public CollegueService(CollegueValidator collegueValidator,DataUtils dataUtils) {
 
 		this.collegueValidator = collegueValidator;
+		this.dataUtils = dataUtils;
 	}
 
 	/**
