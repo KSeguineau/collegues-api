@@ -1,6 +1,5 @@
 package dev.collegues;
 
-import dev.collegues.entite.Collegue;
 import dev.collegues.repository.CollegueRepository;
 import dev.collegues.utils.DataUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,8 +7,7 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDate;
-import java.util.UUID;
+
 
 /**
  * Classe initialisant la bdd

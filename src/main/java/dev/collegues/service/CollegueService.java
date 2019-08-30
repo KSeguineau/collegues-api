@@ -1,18 +1,13 @@
 package dev.collegues.service;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashMap;
+
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
-import java.util.stream.Collectors;
 import dev.collegues.entite.Collegue;
 import dev.collegues.exception.CollegueInvalideException;
 import dev.collegues.exception.CollegueNonTrouveException;
 import dev.collegues.repository.CollegueRepository;
 import dev.collegues.utils.CollegueValidator;
-import dev.collegues.utils.DataUtils;
 import lombok.Data;
 import org.springframework.stereotype.Service;
 
