@@ -11,8 +11,8 @@ import dev.collegues.exception.CollegueInvalideException;
 import dev.collegues.exception.CollegueNonTrouveException;
 
 public class CollegueServiceTest {
-
-	@Test
+ //TODO faire classe test validator
+	/*@Test
 	public void testAjoutCollegueValide() {
 		Collegue collegue = new Collegue(null, "Kong", "Diddy", "diddy.kong@bannane.fr",
 				LocalDate.of(1990, 1, 1),
@@ -150,6 +150,6 @@ public class CollegueServiceTest {
 		String photo = "/new.fr";
 		cs.modifierPhotoUrl(collegue.getMatricule(), photo);
 
-	}
+	}*/
 
 }

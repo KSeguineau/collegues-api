@@ -11,6 +11,7 @@ import dev.collegues.entite.Collegue;
 import dev.collegues.exception.CollegueInvalideException;
 import dev.collegues.exception.CollegueNonTrouveException;
 import dev.collegues.utils.CollegueValidator;
+import dev.collegues.utils.DataUtils;
 import lombok.Data;
 import org.springframework.stereotype.Service;
 
@@ -21,10 +22,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class CollegueService {
 
-	/**
-	 * Map sauvegardant les collegues, leur clé est leur matricule
-	 */
-	private Map<String, Collegue> data = new HashMap<>();
 
     /**
      * Classe contenant des methodes de validation de collegue
@@ -32,23 +29,14 @@ public class CollegueService {
     private CollegueValidator collegueValidator;
 
 	/**
-	 * Constructeur par défaut
-	 * créer automatiquement 4 collegues
+	 * Classe gérant la generation de collegue et leur stockage
 	 */
-	public CollegueService(CollegueValidator collegueValidator) {
+	private DataUtils dataUtils;
 
-		Collegue c = new Collegue(UUID.randomUUID().toString(), "bob", "bobby", "a@a.fr", LocalDate.now(),
-				"https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/SNice.svg/180px-SNice.svg.png");
-		data.put(c.getMatricule(), c);
-		c = new Collegue(UUID.randomUUID().toString(), "tom", "tommy", "b@b.fr", LocalDate.now(),
-				"https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/SNice.svg/180px-SNice.svg.png");
-		data.put(c.getMatricule(), c);
-		c = new Collegue(UUID.randomUUID().toString(), "math", "mathy", "c@c.fr", LocalDate.now(),
-				"https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/SNice.svg/180px-SNice.svg.png");
-		data.put(c.getMatricule(), c);
-		c = new Collegue(UUID.randomUUID().toString(), "tim", "timmy", "d@d.fr", LocalDate.now(),
-				"https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/SNice.svg/180px-SNice.svg.png");
-		data.put(c.getMatricule(), c);
+	/**
+	 * Constructeur
+	 */
+	public CollegueService(CollegueValidator collegueValidator,DataUtils dataUtils) {
 
 		this.collegueValidator = collegueValidator;
 	}
@@ -58,8 +46,7 @@ public class CollegueService {
 	 * @param nomRecherche nom du collegue à rechercher
 	 * @return Une List de collegue */
 	public List<Collegue> rechercherParNom(String nomRecherche) {
-		List<Collegue> list = new ArrayList<>(data.values());
-		return list.stream().filter(c -> c.getNom().equals(nomRecherche)).collect(Collectors.toList());
+		return dataUtils.rechercheParNom(nomRecherche);
 	}
 
 	/**
@@ -68,7 +55,7 @@ public class CollegueService {
 	 * @return un Collegue
 	 */
 	public Collegue rechercherParMatricule(String matricule) {
-		Collegue c = data.get(matricule);
+		Collegue c = dataUtils.rechercheParMatricule(matricule);
 		if (c != null) {
 			return c;
 		} else {
@@ -86,7 +73,7 @@ public class CollegueService {
 		collegue.setMatricule(UUID.randomUUID().toString());
 
 		if (collegueValidator.validerCollegue(collegue)) {
-			this.data.put(collegue.getMatricule(), collegue);
+			dataUtils.ajouterCollegue(collegue);
 			return collegue;
 		} else {
 			throw new CollegueInvalideException();
@@ -101,13 +88,12 @@ public class CollegueService {
 	 * @return un collegue
 	 */
 	public Collegue modifierEmail(String matricule, String email) {
-    //TODO utiliser CollegueValidator
 		Collegue collegue = this.rechercherParMatricule(matricule);
 		if (collegue == null) {
 			throw new CollegueNonTrouveException();
 		}
 
-		if (email.length() > 2 && email.contains("@")) {
+		if (collegueValidator.longueurValide(email,2) && collegueValidator.isContains(collegue)) {
 			collegue.setEmail(email);
 			return collegue;
 		} else {
@@ -122,13 +108,12 @@ public class CollegueService {
 	 * @return un collegue
 	 */
 	public Collegue modifierPhotoUrl(String matricule, String photoUrl) {
-//TODO utiliser CollegueValidator
 		Collegue collegue = this.rechercherParMatricule(matricule);
 		if (collegue == null) {
 			throw new CollegueNonTrouveException();
 		}
 
-		if (photoUrl.startsWith("http")) {
+		if (collegueValidator.startWithhttp(collegue)) {
 			collegue.setPhotoUrl(photoUrl);
 			return collegue;
 		} else {
