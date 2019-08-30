@@ -38,17 +38,6 @@ public class DataUtils {
 
     }
 
-    public List<Collegue> rechercheParNom(String nomRecherche){
-        List<Collegue> list = new ArrayList<>(data.values());
-        return list.stream().filter(c -> c.getNom().equals(nomRecherche)).collect(Collectors.toList());
-    }
 
-    public Collegue rechercheParMatricule(String matricule){
-        return data.get(matricule);
-    }
-
-    public void ajouterCollegue(Collegue collegue){
-        data.put(collegue.getMatricule(),collegue);
-    }
 
 }
