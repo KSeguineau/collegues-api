@@ -11,7 +11,7 @@ import dev.collegues.exception.CollegueInvalideException;
 import dev.collegues.exception.CollegueNonTrouveException;
 
 public class CollegueServiceTest {
- //TODO faire classe test validator
+ //TODO refaire
 	/*@Test
 	public void testAjoutCollegueValide() {
 		Collegue collegue = new Collegue(null, "Kong", "Diddy", "diddy.kong@bannane.fr",
