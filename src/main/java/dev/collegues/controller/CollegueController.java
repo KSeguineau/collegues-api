@@ -29,7 +29,7 @@ public class CollegueController {
 	/**
 	 * Classe service des collegues
 	 */
-	CollegueService collegueService;
+	private CollegueService collegueService;
 
 	@Autowired
 	public CollegueController(CollegueService collegueService) {
@@ -74,7 +74,7 @@ public class CollegueController {
 	 */
 	@PatchMapping("/collegues/{matricule}")
 	public Collegue modifierCollegue(@RequestBody Collegue collegue, @PathVariable String matricule) {
-		Collegue colleguemodifie = collegue;
+		Collegue colleguemodifie = null;
 		if (collegue.getEmail() != null) {
 			colleguemodifie=collegueService.modifierEmail(matricule, collegue.getEmail());
 		}
