@@ -1,0 +1,493 @@
+{
+	"info": {
+		"_postman_id": "8cb8fb1a-b195-4e1e-8a93-672b3f0d0c55",
+		"name": "requetes paie-collegue-api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "collegue-api",
+			"item": [
+				{
+					"name": "recuperationMatriculeByNom",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://kseguineau-collegues-api.herokuapp.com/collegues?nom=bob",
+							"protocol": "https",
+							"host": [
+								"kseguineau-collegues-api",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"collegues"
+							],
+							"query": [
+								{
+									"key": "nom",
+									"value": "bob"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "recuperationInformationCollegue",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://kseguineau-collegues-api.herokuapp.com/collegues/{matricule}",
+							"protocol": "https",
+							"host": [
+								"kseguineau-collegues-api",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"collegues",
+								"{matricule}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ajoutCollegue",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nom\": \"bob\",\r\n    \"prenom\": \"bobby\",\r\n    \"email\": \"a@a.fr\",\r\n    \"ddn\": \"1990-09-04\",\r\n    \"photoUrl\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/SNice.svg/180px-SNice.svg.png\"\r\n}"
+						},
+						"url": {
+							"raw": "https://kseguineau-collegues-api.herokuapp.com/collegues",
+							"protocol": "https",
+							"host": [
+								"kseguineau-collegues-api",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"collegues"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "modifierPhotoCollegue",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"photoUrl\": \"http://new.fr\"\n}"
+						},
+						"url": {
+							"raw": "https://kseguineau-collegues-api.herokuapp.com/collegues/{matricule}",
+							"protocol": "https",
+							"host": [
+								"kseguineau-collegues-api",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"collegues",
+								"{matricule}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "modifierEmailCollegue",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"bob@bob.fr\"\n}"
+						},
+						"url": {
+							"raw": "https://kseguineau-collegues-api.herokuapp.com/collegues/{matricule}",
+							"protocol": "https",
+							"host": [
+								"kseguineau-collegues-api",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"collegues",
+								"{matricule}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "connexion user collegue-api",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"login\" : \"admin\",\r\n    \"mdp\" : \"admin\"\r\n}"
+						},
+						"url": {
+							"raw": "https://kseguineau-collegues-api.herokuapp.com/auth",
+							"protocol": "https",
+							"host": [
+								"kseguineau-collegues-api",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "recuperer information collegue",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://kseguineau-collegues-api.herokuapp.com/auth/user",
+							"protocol": "https",
+							"host": [
+								"kseguineau-collegues-api",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"auth",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "connexion admin collegue-api",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"login\" : \"admin\",\r\n    \"mdp\" : \"admin\"\r\n}"
+						},
+						"url": {
+							"raw": "https://kseguineau-collegues-api.herokuapp.com/auth",
+							"protocol": "https",
+							"host": [
+								"kseguineau-collegues-api",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"auth"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "paie-api",
+			"item": [
+				{
+					"name": "ajouterRemunerationEmploye",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"matricule\":\"{matricule}\",\n\t\"codeEntreprise\":\"DEV\",\n\t\"codeProfil\":\"Cadre\",\n\t\"codeGrade\":\"GRADE_A\"\n\t\n}"
+						},
+						"url": {
+							"raw": "https://kseguineau-paie-api.herokuapp.com/remuneration_employe",
+							"protocol": "https",
+							"host": [
+								"kseguineau-paie-api",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"remuneration_employe"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ajouterBulletinSalaire",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"periode\":{\"id\": 1,\"dateDebut\": \"2019-01-01\",\"dateFin\": \"2019-01-31\"},\n\t\"matricule\":\"{matricule}\",\n\t\"primeExceptionnelle\":1000.0\n}"
+						},
+						"url": {
+							"raw": "https://kseguineau-paie-api.herokuapp.com/bulletin_salaire",
+							"protocol": "https",
+							"host": [
+								"kseguineau-paie-api",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"bulletin_salaire"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listPeriodes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://kseguineau-paie-api.herokuapp.com/periodes",
+							"protocol": "https",
+							"host": [
+								"kseguineau-paie-api",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"periodes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listGrades",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://kseguineau-paie-api.herokuapp.com/grades",
+							"protocol": "https",
+							"host": [
+								"kseguineau-paie-api",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"grades"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listProfilRemuneration",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://kseguineau-paie-api.herokuapp.com/profils_remunerations",
+							"protocol": "https",
+							"host": [
+								"kseguineau-paie-api",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"profils_remunerations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "referenciel",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://kseguineau-paie-api.herokuapp.com/referenciels",
+							"protocol": "https",
+							"host": [
+								"kseguineau-paie-api",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"referenciels"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listEntreprises",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://kseguineau-paie-api.herokuapp.com/entreprises",
+							"protocol": "https",
+							"host": [
+								"kseguineau-paie-api",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"entreprises"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listRemunerationEmploye",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://kseguineau-paie-api.herokuapp.com/remuneration_employe",
+							"protocol": "https",
+							"host": [
+								"kseguineau-paie-api",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"remuneration_employe"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listMatriculeRemunerationEmpolye",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://kseguineau-paie-api.herokuapp.com/remuneration_employe?matricules",
+							"protocol": "https",
+							"host": [
+								"kseguineau-paie-api",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"remuneration_employe"
+							],
+							"query": [
+								{
+									"key": "matricules",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listBulletinSalaire",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://kseguineau-paie-api.herokuapp.com/bulletin_salaire",
+							"protocol": "https",
+							"host": [
+								"kseguineau-paie-api",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"bulletin_salaire"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "recuperationVisualisationPDF",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://kseguineau-paie-api.herokuapp.com/bulletin_salaire/{code}",
+							"protocol": "https",
+							"host": [
+								"kseguineau-paie-api",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"bulletin_salaire",
+								"{code}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
