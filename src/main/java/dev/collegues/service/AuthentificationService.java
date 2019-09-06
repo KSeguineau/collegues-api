@@ -4,6 +4,7 @@ import dev.collegues.controller.dto.CollegueDto;
 import dev.collegues.controller.dto.InfosAuthentificationPost;
 import dev.collegues.entite.Authentification;
 import dev.collegues.exception.AuthentificationIncorrect;
+import dev.collegues.exception.CollegueNonTrouveException;
 import dev.collegues.repository.AuthentificationRepository;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -46,6 +47,7 @@ public class AuthentificationService {
                 .map(utilisateur -> {
                     Map<String,Object> infosSupplementaireToken = new HashMap<>();
                     infosSupplementaireToken.put("roles",utilisateur.getRoles());
+                    infosSupplementaireToken.put("matricule",authentificationRepository.findByLogin(utilisateur.getLogin()).orElseThrow(CollegueNonTrouveException::new).getCollegue().getMatricule());
 
                     String jetonJWT = Jwts.builder()
                             .setSubject(utilisateur.getLogin())
