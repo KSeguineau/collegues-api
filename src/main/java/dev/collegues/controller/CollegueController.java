@@ -4,6 +4,7 @@ import static java.util.stream.Collectors.toList;
 
 import java.util.List;
 
+import dev.collegues.controller.dto.PhotoDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -34,11 +35,20 @@ public class CollegueController {
 	 * @param nom nom du Collegue
 	 * @return la liste des matricules des collegues trouvé
 	 */
-	@GetMapping("/collegues")
+	@GetMapping(value = "/collegues",params = "nom")
 	public List<String> rechercherParNom(@RequestParam String nom) {
-		return collegueService.rechercherParNom(nom).stream().map(c -> c.getMatricule()).collect(toList());
+		return collegueService.rechercherParNom(nom);
 	}
 
+	@GetMapping(value = "/collegues",params = "email")
+	public List<String> rechercherParEmail(@RequestParam String email){
+		return collegueService.rechercherParEmail(email);
+	}
+
+	@GetMapping(value = "/collegues/photos")
+	public List<PhotoDto> rechercherPhotosCollegues(){
+		return collegueService.rechercherPhotosCollegues();
+	}
 	/**
 	 * traite la requete de recherche par matricule
 	 * @param matricule matricule d’un collegue
