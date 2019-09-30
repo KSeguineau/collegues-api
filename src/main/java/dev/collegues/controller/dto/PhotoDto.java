@@ -9,6 +9,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class PhotoDto {
 
-    private String matricule;
-    private String Photo;
+	private String matricule;
+	private String photoUrl;
 }
